@@ -40,7 +40,7 @@ function playStream(idVideoTag, stream){
 //.then(stream => playStream('localStream',stream));
 
 //const peer = new Peer({key: 'wkr3olzfv9rudi'});
-const peer = new Peer({key: 'peerjs', host: 'mypeer3005.herokuapp.com', secure: true, port:443});
+const peer = new Peer({key: 'peerjs', host: 'mypeer3005.herokuapp.com', secure: true, port: 443});
 
 
 peer.on('open', id => {
