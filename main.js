@@ -2,6 +2,24 @@ const socket = io('https://stream1801.herokuapp.com/');
 
 $('#div-chat').hide();
 
+let customConfig;
+
+$.ajax({
+  url: "",
+  data: {
+    ident: "parkjaeha",
+    secret: "9e2ac3be-fdc8-11e7-bf3f-9884ff03e586",
+    domain: "parkjaeha.github.io",
+    application: "default",
+    room: "default",
+    secure: 1
+  },
+  success: function (data, status) {
+    customConfig = data.d;
+    console.log(customConfig);
+  },
+  async: false
+});
 
 socket.on('DANH_SACH_ONLINE', arrUserInfo => {
 
@@ -42,7 +60,13 @@ function playStream(idVideoTag, stream){
 //openStream()
 //.then(stream => playStream('localStream', stream));
 
-const peer = new Peer({key: 'peerjs', host: 'mypeer1801.herokuapp.com' , secure: true, port: 443 });
+const peer = new Peer({
+  key: 'peerjs',
+  host: 'mypeer1801.herokuapp.com',
+  secure: true,
+  port: 443,
+  config: customConfig
+});
 
 peer.on('open', id => {
   $('#my-peer').append(id);
