@@ -1,5 +1,5 @@
 const socket = io('https://stream1801.herokuapp.com/');
-
+const count = 0;
 $('#div-chat').hide();
 
 let customConfig;
@@ -20,12 +20,11 @@ $.ajax({
   },
   async: false
 });
-
+// user info get
 socket.on('DANH_SACH_ONLINE', arrUserInfo => {
 
-    $('#div-chat').show();
-    $('#div-dang-ky').hide();
-
+    $('#div-chat').show();    // 값 입력 후 stream video channel 로 enter
+    $('#div-dang-ky').hide(); // 입장시 id 입력 창
 
     //console.log(arrUserInfo);
     arrUserInfo.forEach(user => {
@@ -76,9 +75,24 @@ peer.on('open', id => {
   });
 });
 
+//ADD    - extra
+$('#add').click( () => {
+
+  console.log("add click");
+  arrUserInfo.forEach(user => {
+    // extra
+      const { ten, peerId } = user;
+      console.log("peerId: " + peerId);
+      console.log("ten: " + ten);
+  });
+
+    $('#result').append(`<br /><br /><video class="${peerId}" width="300" controls></video>`);
+});
+
  //caller
 $('#btnCall').click(() => {
   const id = $('#remoteId').val();
+  console.log("id: "+id);
   openStream()
   .then(stream => {
       playStream('localStream', stream);
