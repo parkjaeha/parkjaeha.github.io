@@ -78,9 +78,10 @@ peer.on('open', id => {
 //ADD    - extra
 $('#add').click( () => {
 
+  $('#result').append(`<div>`count`</div>`);
+  count++;
   console.log("add click");
-  const i = 0;
-    $('#result').append(`<br /><br /><video class="`+i+`" width="300" controls></video>`);
+    $('#result').append(`<br /><br /><video class="`count`" width="300" controls></video>`);
 });
 
  //caller
