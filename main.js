@@ -79,14 +79,8 @@ peer.on('open', id => {
 $('#add').click( () => {
 
   console.log("add click");
-  arrUserInfo.forEach(user => {
-    // extra
-      const { ten, peerId } = user;
-      console.log("peerId: " + peerId);
-      console.log("ten: " + ten);
-  });
-
-    $('#result').append(`<br /><br /><video class="${peerId}" width="300" controls></video>`);
+  const i = 0;
+    $('#result').append(`<br /><br /><video class="`+i+`" width="300" controls></video>`);
 });
 
  //caller
