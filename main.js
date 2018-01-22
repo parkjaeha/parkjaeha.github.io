@@ -83,14 +83,14 @@ peer.on('open', id => {
   });
 });
 
-var test =0;
+var count =0;
 
 //ADD    - extra
 $('#add').click( () => {
 
-  $('#result').append(`<div>`+test+`</div>`);
-    $('#result').append(`<br /><br /><video class="`+test+`" width="300" controls></video>`);
-    test++;
+  $('#result').append(`<div>`+count+`</div>`);
+    $('#result').append(`<br /><br /><video class="`+count+`" width="300" controls></video>`);
+    count++;
     console.log("data:"+data);
 });
 
