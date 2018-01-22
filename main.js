@@ -1,5 +1,5 @@
 const socket = io('https://stream1801.herokuapp.com/');
-const count = 0;
+var data = [];
 $('#div-chat').hide();
 
 let customConfig;
@@ -25,10 +25,18 @@ socket.on('DANH_SACH_ONLINE', arrUserInfo => {
 
     $('#div-chat').show();    // 값 입력 후 stream video channel 로 enter
     $('#div-dang-ky').hide(); // 입장시 id 입력 창
+    data = arrUserInfo;
+    console.log("arr:"+arrUserInfo);
+    console.log("data:"+ data);
 
-    //console.log(arrUserInfo);
+    data.forEach(user =>{
+      const {ten ,peerId} =  user;
+        console.log("result-data : " + peerId+ " / " + ten);
+    });
+
     arrUserInfo.forEach(user => {
         const { ten, peerId } = user;
+      //  console.log("result-arr : " + peerId+ " / " + ten);
         $('#ulUser').append(`<li id="${peerId}">${ten}</li>`);
     });
 
@@ -43,10 +51,10 @@ socket.on('DANH_SACH_ONLINE', arrUserInfo => {
     });
 });
 
-socket.on('DANG_KY_THAT_BAT', () => alert('Vui long chon username khac!'));
+socket.on('DANG_KY_THAT_BAT', () => alert('SAME USERNAME EXIST'));
 
 function openStream(){
-    const config = { audio: false, video: true };
+    const config = { audio: true, video: true };
     return navigator.mediaDevices.getUserMedia(config);
 }
 
@@ -75,13 +83,15 @@ peer.on('open', id => {
   });
 });
 
+var test =0;
+
 //ADD    - extra
 $('#add').click( () => {
 
-  $('#result').append(`<div>`+count+`</div>`);
-  console.log("add click");
-    $('#result').append(`<br /><br /><video class="`+count+`" width="300" controls></video>`);
-    count++;
+  $('#result').append(`<div>`+test+`</div>`);
+    $('#result').append(`<br /><br /><video class="`+test+`" width="300" controls></video>`);
+    test++;
+    console.log("data:"+data);
 });
 
  //caller
