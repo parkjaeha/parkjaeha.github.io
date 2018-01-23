@@ -28,7 +28,7 @@ socket.on('ONLINE', arrUserInfo => {
     console.log("arr: "+arrUserInfo);
     arrUserInfo.forEach(user => {
         const { ten, peerId } = user;
-        //console.log("result-arr : " + peerId+ " / " + ten);
+        console.log("result-arr : " + peerId+ " / " + ten);
         $('#ulUser').append(`<li id="${peerId}">${ten}</li>`);
     });
 
@@ -81,7 +81,7 @@ peer.on('open', id => {
  //caller
 $('#btnCall').click(() => {
   const id = $('#remoteId').val();
-  console.log("id: "+id);
+  //console.log("id: "+id);
   openStream()
   .then(stream => {
       playStream('localStream', stream);
@@ -102,9 +102,9 @@ peer.on('call', call => {
 
 /////////////////////////////////////////////////////////
 socket.on("server-send-rooms", function(data){
-	$("#dsRoom").html("");
-	data.map(function(r){
-		$("#dsRoom").append("<h4 class='room'>"+r+"</h4>");
+	   $("#dsRoom").html("");
+	 data.map(function(r){
+	   $("#dsRoom").append("<h4 class='room'>"+r+"</h4>");
 	});
 });
 
@@ -114,14 +114,16 @@ socket.on("server-send-room-socket", function(data){
 
 socket.on("server-chat",function(data){
   console.log("data: "+data);
-	$("#right").append("<div>"+ data +"</div>");
+	$("#txtwindow").append("<div>"+ data +"</div>");
 	//alert(data);
 });
-
+var name="";
 function getName(room,id){
-var name = prompt("이름을 입력하세요.", "");
+name = prompt("이름을 입력하세요.", "");
 var bool= confirm("이름이 "+name+" 맞습니까?");
-console.log("result-arr : " + peerId+ " / " + ten);
+
+
+
   if(bool && id.trim() != ""){
     socket.emit('TEST', { ten: name, peerId: id });
     socket.emit('USER-INFO', { ten: name, peerId: id });
@@ -146,15 +148,12 @@ peer.on('open', id => {
     //  socket.emit('USER-INFO',   { ten: username, peerId: id });
       getName(room);
   });
-
 });
-
 
 $(document).ready(function(){
 
-
 	$("#btnRoom").click(function(){
-		socket.emit("room-num",$('#txtUsername').val());
+		socket.emit("room-num",$('#txtRoom').val());
 	});
 
 	$("#btnChat").click(function(){
