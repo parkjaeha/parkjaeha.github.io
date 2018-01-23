@@ -118,14 +118,13 @@ socket.on("server-chat",function(data){
 	//alert(data);
 });
 var name="";
+
 function getName(room,id){
 name = prompt("이름을 입력하세요.", "");
 var bool= confirm("이름이 "+name+" 맞습니까?");
 
-
-
   if(bool && id.trim() != ""){
-    socket.emit('TEST', { ten: name, peerId: id });
+
     socket.emit('USER-INFO', { ten: name, peerId: id });
     location.href="./test.html?room="+room+"&id="+name;
   }else{
