@@ -21,18 +21,11 @@ $.ajax({
   async: false
 });
 // user info get
-socket.on('DANH_SACH_ONLINE', arrUserInfo => {
+socket.on('ONLINE', arrUserInfo => {
 
     $('#div-chat').show();    // 값 입력 후 stream video channel 로 enter
-    $('#div-dang-ky').hide(); // 입장시 id 입력 창
-    data = arrUserInfo;
-    console.log("arr:"+arrUserInfo);
-    console.log("data:"+ data);
+    $('#div-enter').hide(); // 입장시 id 입력 창
 
-    data.forEach(user =>{
-      const {ten ,peerId} =  user;
-        console.log("result-data : " + peerId+ " / " + ten);
-    });
 
     arrUserInfo.forEach(user => {
         const { ten, peerId } = user;
@@ -40,18 +33,18 @@ socket.on('DANH_SACH_ONLINE', arrUserInfo => {
         $('#ulUser').append(`<li id="${peerId}">${ten}</li>`);
     });
 
-    socket.on('CO_NGUOI_DUNG_MOI', user => {
+    socket.on('USER', user => {
         //console.log(user);
         const { ten, peerId } = user;
         $('#ulUser').append(`<li id="${peerId}">${ten}</li>`);
     });
 
-    socket.on('AI_DO_NGAT_KET_NOI',peerId => {
+    socket.on('DISCONNECT',peerId => {
       $(`#${peerId}`).remove();
     });
 });
 
-socket.on('DANG_KY_THAT_BAT', () => alert('SAME USERNAME EXIST'));
+socket.on('EXIST', () => alert('SAME USERNAME EXIST'));
 
 function openStream(){
     const config = { audio: true, video: true };
@@ -79,20 +72,11 @@ peer.on('open', id => {
   $('#my-peer').append(id);
   $('#btnSignUp').click( () => {
       const username = $('#txtUsername').val();
-      socket.emit('NGUOI_DUNG_DANG_KY',   { ten: username, peerId: id });
+      socket.emit('USER-INFO',   { ten: username, peerId: id });
+      console.log('123');
   });
 });
 
-var count =0;
-
-//ADD    - extra
-$('#add').click( () => {
-
-  $('#result').append(`<div>`+count+`</div>`);
-    $('#result').append(`<br /><br /><video class="`+count+`" width="300" controls></video>`);
-    count++;
-    console.log("data:"+data);
-});
 
  //caller
 $('#btnCall').click(() => {
@@ -106,6 +90,7 @@ $('#btnCall').click(() => {
   });
 });
 
+//callee
 peer.on('call', call => {
   openStream()
   .then(stream => {
@@ -114,3 +99,5 @@ peer.on('call', call => {
     call.on('stream',remoteStream => playStream('remoteStream', remoteStream));
   });
 });
+
+/////////////////////////////////////////////////////////
