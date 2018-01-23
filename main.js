@@ -101,3 +101,29 @@ peer.on('call', call => {
 });
 
 /////////////////////////////////////////////////////////
+socket.on("server-send-rooms", function(data){
+	$("#dsRoom").html("");
+	data.map(function(r){
+		$("#dsRoom").append("<h4 lcass='room'>"+r+"</h4>");
+	});
+});
+
+socket.on("server-send-room-socket", function(data){
+	$("#room-connecter").html(data);
+});
+
+socket.on("server-chat",function(data){
+	$("#right").append("<div>"+ data +"</div>");
+	//alert(data);
+});
+
+$(document).ready(function(){
+
+	$("#btnRoom").click(function(){
+		socket.emit("room-num",$("#txtRoom").val());
+	});
+
+	$("#btnChat").click(function(){
+		socket.emit("user-chat",$("#txtMessage").val());
+	});
+});
