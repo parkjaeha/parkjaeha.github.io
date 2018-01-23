@@ -133,7 +133,7 @@ var bool= confirm("이름이 "+name+" 맞습니까?");
 }
 
 peer.on('open', id => {
-  //$('#my-peer').append(id);
+  $('#my-peer').append(id);
   $(".l_room").click(function(){
     var room = $(this).attr('id');
     console.log("l_data: "+ room);
