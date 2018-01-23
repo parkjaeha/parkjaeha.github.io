@@ -25,10 +25,10 @@ socket.on('ONLINE', arrUserInfo => {
 
     //$('#div-chat').show();    // 값 입력 후 stream video channel 로 enter
     //$('#div-enter').hide(); // 입장시 id 입력 창
-
+    console.log("arr: "+arrUserInfo);
     arrUserInfo.forEach(user => {
         const { ten, peerId } = user;
-      //  console.log("result-arr : " + peerId+ " / " + ten);
+        //console.log("result-arr : " + peerId+ " / " + ten);
         $('#ulUser').append(`<li id="${peerId}">${ten}</li>`);
     });
 
@@ -113,6 +113,7 @@ socket.on("server-send-room-socket", function(data){
 });
 
 socket.on("server-chat",function(data){
+  console.log("data: "+data);
 	$("#right").append("<div>"+ data +"</div>");
 	//alert(data);
 });
@@ -120,9 +121,9 @@ socket.on("server-chat",function(data){
 function getName(room,id){
 var name = prompt("이름을 입력하세요.", "");
 var bool= confirm("이름이 "+name+" 맞습니까?");
-
+console.log("result-arr : " + peerId+ " / " + ten);
   if(bool && id.trim() != ""){
-
+    socket.emit('TEST', { ten: name, peerId: id });
     socket.emit('USER-INFO', { ten: name, peerId: id });
     location.href="./test.html?room="+room+"&id="+name;
   }else{
@@ -132,7 +133,6 @@ var bool= confirm("이름이 "+name+" 맞습니까?");
 
 peer.on('open', id => {
   //$('#my-peer').append(id);
-
   $(".l_room").click(function(){
     var room = $(this).attr('id');
     console.log("l_data: "+ room);
