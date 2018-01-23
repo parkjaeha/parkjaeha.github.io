@@ -1,0 +1,11 @@
+@CHARSET "EUC-KR";
+
+body{
+	background-color: yellow;
+	height: 50px;
+}
+
+#left{width: 200px; float:left; boarder:solid 1px pink; }
+#right{width: 600px; float: right; boarder:solid 1px pink;}
+#roomHienTai{background-color: gray; width: 100px;
+ float: right; color: white;}
