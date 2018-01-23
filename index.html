@@ -9,44 +9,112 @@
 
     </head>
     <body>
-    <div id="div-chat">
 
-        <p>Online user: </p>
-        <ul id="ulUser">
-        </ul>
-        <h3 id="my-peer">You Id : </h3>
-        <video id="localStream" width="300" controls></video>
-        <br /><br />
-        <video id="remoteStream" width="300" controls></video>
-        <br /><br />
-        <input type="text" id="remoteId" placeholder="Remote Id">
-        <button id="btnCall">Call</button>
+<div id="m_left">
+       <div id="div-enter">
+          <br /><br />
+          <input type="text" id="txtUsername" placeholder="Enter your username">
+          <button id="btnSignUp">Sign up</button>
+        </div>
+</div>
+<div id="m_right">
 
-         <br /><br />
-        <input type="text" id="txtRoom"/>
-  <input type="button" id="btnRoom" value="join">
+<div class="l_div">
+  <div class="l_room" id="room1">
 
-  <br /><br />
-  <div id="left">
-    <h3>Chat Rooms</h3>
-    <div id="dsRoom"></div>
-  </div>
-  <h4 id="room-connecter">...</h4>
+    <div class="room_t">
+      <img style="float:left" width="100px;"height="100px;" src="">
+      <div style="float:right">김보근</div>
+    </div>
 
-  <br /><br />
-  <div id="right">
-  </div>
-
-  <input type="text" id="txtMessage"/>
-  <input type="button" id="btnChat" value="Chat"/>
-     </div>
-
-     <div id="div-enter">
-        <br /><br />
-        <input type="text" id="txtUsername" placeholder="Enter your username">
-        <button id="btnSignUp">Sign up</button>
+    <div class="room_b">
+      <div>
+        <p>자바 개발자 양성과정</P>
+        <p>게시판</P>
       </div>
+    </div>
+  </div>
 
+  <div class="l_room" id="room3">
+
+    <div class="room_t">
+      <img style="float:left" width="100px;"height="100px;" src="">
+      <div style="float:right">박재하</div>
+    </div>
+
+    <div class="room_b">
+      <div>
+        <p>자바 개발자 양성과정</P>
+        <p>웹캠 상담</P>
+      </div>
+    </div>
+
+  </div>
+  <div class="l_room" id="room5">
+
+    <div class="room_t">
+      <img style="float:left" width="100px;"height="100px;" src="">
+      <div style="float:right">이경배</div>
+    </div>
+
+    <div class="room_b">
+      <div>
+        <p>자바 개발자 양성과정</P>
+        <p>캘린더</P>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="r_div">
+  <div class="r_room" id="room2">
+
+    <div class="room_t">
+      <img style="float:left" width="100px;"height="100px;" src="">
+      <div style="float:right">이수빈</div>
+    </div>
+
+    <div class="room_b">
+      <div>
+        <p>자바 개발자 양성과정</P>
+        <p>단체 메신저</P>
+      </div>
+    </div>
+
+  </div>
+  <div class="r_room" id="room4">
+
+    <div class="room_t">
+      <img style="float:left" width="100px;"height="100px;" src="">
+      <div style="float:right">정도원</div>
+    </div>
+
+    <div class="room_b">
+      <div>
+          <p>자바 개발자 양성과정</P>
+          <p>웹 컴파일러</P>
+      </div>
+    </div>
+
+  </div>
+  <div class="r_room" id="room6">
+
+    <div class="room_t">
+      <img style="float:left" width="100px;"height="100px;" src="">
+      <div style="float:right">정연재</div>
+    </div>
+
+    <div class="room_b">
+      <div>
+          <p>자바 개발자 양성과정</P>
+          <p>메인 및 로그인</P>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
     </body>
     <script src="main.js"></script>
 </html>

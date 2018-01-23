@@ -1,6 +1,6 @@
 const socket = io('https://stream1801.herokuapp.com/');
 var data = [];
-$('#div-chat').hide();
+//$('#div-chat').hide();
 
 let customConfig;
 
@@ -23,9 +23,8 @@ $.ajax({
 // user info get
 socket.on('ONLINE', arrUserInfo => {
 
-    $('#div-chat').show();    // 값 입력 후 stream video channel 로 enter
-    $('#div-enter').hide(); // 입장시 id 입력 창
-
+    //$('#div-chat').show();    // 값 입력 후 stream video channel 로 enter
+    //$('#div-enter').hide(); // 입장시 id 입력 창
 
     arrUserInfo.forEach(user => {
         const { ten, peerId } = user;
@@ -68,15 +67,16 @@ const peer = new Peer({
   config: customConfig
 });
 
+/*
 peer.on('open', id => {
   $('#my-peer').append(id);
+
   $('#btnSignUp').click( () => {
       const username = $('#txtUsername').val();
       socket.emit('USER-INFO',   { ten: username, peerId: id });
-      console.log('123');
   });
 });
-
+*/
 
  //caller
 $('#btnCall').click(() => {
@@ -104,7 +104,7 @@ peer.on('call', call => {
 socket.on("server-send-rooms", function(data){
 	$("#dsRoom").html("");
 	data.map(function(r){
-		$("#dsRoom").append("<h4 lcass='room'>"+r+"</h4>");
+		$("#dsRoom").append("<h4 class='room'>"+r+"</h4>");
 	});
 });
 
@@ -117,13 +117,49 @@ socket.on("server-chat",function(data){
 	//alert(data);
 });
 
+function getName(room,id){
+var name = prompt("이름을 입력하세요.", "");
+var bool= confirm("이름이 "+name+" 맞습니까?");
+
+  if(bool && id.trim() != ""){
+
+    socket.emit('USER-INFO', { ten: name, peerId: id });
+    location.href="./test.html?room="+room+"&id="+name;
+  }else{
+    console.log("retry");
+  }
+}
+
+peer.on('open', id => {
+  //$('#my-peer').append(id);
+
+  $(".l_room").click(function(){
+    var room = $(this).attr('id');
+    console.log("l_data: "+ room);
+    //  socket.emit('USER-INFO',   { ten: username, peerId: id });
+    getName(room,id);
+  });
+
+  $(".r_room").click(function(){
+    var room = $(this).attr('id');
+    console.log("r_data: "+ room);
+    //  socket.emit('USER-INFO',   { ten: username, peerId: id });
+      getName(room);
+  });
+
+});
+
+
 $(document).ready(function(){
 
+
 	$("#btnRoom").click(function(){
-		socket.emit("room-num",$("#txtRoom").val());
+		socket.emit("room-num",$('#txtUsername').val());
 	});
 
 	$("#btnChat").click(function(){
 		socket.emit("user-chat",$("#txtMessage").val());
 	});
+
+
 });
