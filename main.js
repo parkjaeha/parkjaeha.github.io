@@ -40,14 +40,22 @@ socket.on('ONLINE', arrUserInfo => {
 ///////////////////////////////////
 socket.on('GETDATA', data=>{
   const {room , id} = testData;
-  $('#test').append(`<li id="${room}">${id}</li>`);
+  $('#room-connecter').append(`${room} /1/ ${id}`);
 });
 
 socket.on('GETEST', testData => {
   testData.forEach(data2 => {
     const { room, id } = data2;
       console.log("test : " + room+ " / " + id);
-    $('#test').append(`<li id="${room}">${id}</li>`);
+    $('#room-connecter').append(`${room} /2/ ${id}`);
+  });
+});
+
+socket.on('please',testData=> {
+  testData.forEach(data2 => {
+    const { room, id } = data2;
+      console.log("test : " + room+ " / " + id);
+    $('#room_test').append(`${room} /2/ ${id}`);
   });
 });
 
@@ -142,7 +150,7 @@ var bool= confirm("이름이 "+name+" 맞습니까?");
 
     socket.emit('USER-INFO', { ten: name, peerId: id });
     socket.emit('TEST', {room: room , id: name});
-    //location.href="./test.html?room="+room+"&id="+name;
+    location.href="./test.html?room="+room+"&id="+name;
   }else{
     console.log("retry");
   }
@@ -170,6 +178,7 @@ $(document).ready(function(){
 
 	$("#btnRoom").click(function(){
 		socket.emit("room-num",$('#txtRoom').val());
+    socket.emit("test2","hello");
 	});
 
 	$("#btnChat").click(function(){
