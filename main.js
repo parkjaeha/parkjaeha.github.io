@@ -60,10 +60,13 @@ socket.on('please',testData=> {
   });
 });
 
-socket.on("join",function(data){
-  console.log("data: "+data);
-	$("#room_test2").append("<div>"+ data +"</div>");
-	//alert(data);
+socket.on("join",testData=> {
+  testData.forEach(data2 => {
+    const { room, id } = data2;
+      console.log("test : " + room+ " / " + id);
+    $('#room_test2').append("gogo");
+    $('#room_test2').append(`${room} /2/ ${id}`);
+  });
 });
 
 /////////////////////////////////
