@@ -55,8 +55,15 @@ socket.on('please',testData=> {
   testData.forEach(data2 => {
     const { room, id } = data2;
       console.log("test : " + room+ " / " + id);
+    $('#room_test').append("gogo");
     $('#room_test').append(`${room} /2/ ${id}`);
   });
+});
+
+socket.on("join",function(data){
+  console.log("data: "+data);
+	$("#room_test2").append("<div>"+ data +"</div>");
+	//alert(data);
 });
 
 /////////////////////////////////
@@ -155,19 +162,20 @@ var bool= confirm("이름이 "+name+" 맞습니까?");
     console.log("retry");
   }
 }
-
+var room ="";
 peer.on('open', id => {
   $('#my-peer').append(id);
+$('#room_test2').append("test: "+room);
 
   $(".l_room").click(function(){
-    var room = $(this).attr('id');
+     room = $(this).attr('id');
     console.log("l_data: "+ room);
     //  socket.emit('USER-INFO',   { ten: username, peerId: id });
     getName(room,id);
   });
 
   $(".r_room").click(function(){
-    var room = $(this).attr('id');
+     room = $(this).attr('id');
     console.log("r_data: "+ room);
     //  socket.emit('USER-INFO',   { ten: username, peerId: id });
       getName(room);
@@ -179,6 +187,7 @@ $(document).ready(function(){
 	$("#btnRoom").click(function(){
 		socket.emit("room-num",$('#txtRoom').val());
     socket.emit("test2","hello");
+    socket.emit("test3","hello2");
 	});
 
 	$("#btnChat").click(function(){
