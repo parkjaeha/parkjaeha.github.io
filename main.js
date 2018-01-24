@@ -37,7 +37,21 @@ socket.on('ONLINE', arrUserInfo => {
         const { ten, peerId } = user;
         $('#ulUser').append(`<li id="${peerId}">${ten}</li>`);
     });
+///////////////////////////////////
+socket.on('GETDATA', data=>{
+  const {room , id} = testData;
+  $('#test').append(`<li id="${room}">${id}</li>`);
+});
 
+socket.on('GETEST', testData => {
+  testData.forEach(data2 => {
+    const { room, id } = data2;
+      console.log("test : " + room+ " / " + id);
+    $('#test').append(`<li id="${room}">${id}</li>`);
+  });
+});
+
+/////////////////////////////////
     socket.on('DISCONNECT',peerId => {
       $(`#${peerId}`).remove();
     });
@@ -117,16 +131,18 @@ socket.on("server-chat",function(data){
 	$("#txtwindow").append("<div>"+ data +"</div>");
 	//alert(data);
 });
+
 var name="";
 
 function getName(room,id){
 name = prompt("이름을 입력하세요.", "");
 var bool= confirm("이름이 "+name+" 맞습니까?");
 
-  if(bool && id.trim() != ""){
+  if(bool && id != ""){
 
     socket.emit('USER-INFO', { ten: name, peerId: id });
-    location.href="./test.html?room="+room+"&id="+name;
+    socket.emit('TEST', {room: room , id: name});
+    //location.href="./test.html?room="+room+"&id="+name;
   }else{
     console.log("retry");
   }
@@ -134,7 +150,7 @@ var bool= confirm("이름이 "+name+" 맞습니까?");
 
 peer.on('open', id => {
   $('#my-peer').append(id);
-  
+
   $(".l_room").click(function(){
     var room = $(this).attr('id');
     console.log("l_data: "+ room);
