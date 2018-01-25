@@ -44,7 +44,12 @@ socket.on('ONLINE', arrUserInfo => {
     });
 });
 
-socket.on('EXIST', () => alert('SAME USERNAME EXIST'));
+socket.on('EXIST', () => {
+  $('#room-list').show();
+  $('#room_enter').hide();
+  alert('SAME USERNAME EXIST');
+});
+
 
 function openStream(){
     const config = { audio: true, video: true };
@@ -101,6 +106,26 @@ peer.on('call', call => {
     call.on('stream',remoteStream => playStream('remoteStream', remoteStream));
   });
 });
+/////////////////////////////////////////testData
+$('#btnCall2').click(() => {
+  const id = $('#remoteId2').val();
+  //console.log("id: "+id);
+  openStream()
+  .then(stream => {
+      playStream('localStream', stream);
+      const call = peer.call(id,stream);
+      call.on('stream',testStream => playStream('testStream', testStream));
+  });
+});
+
+peer.on('call', call => {
+  openStream()
+  .then(stream => {
+    call.answer(stream);
+    playStream('localStream', stream);
+    call.on('stream',testStream => playStream('testStream', testStream));
+  });
+});
 
 /////////////////////////////////////////////////////////
 socket.on("server-send-rooms", function(data){
@@ -129,11 +154,12 @@ socket.on("server-chat",function(data){
 
 socket.on("server-name",function(data){
   console.log("data:2 "+data+" / "+name);
+  text="";
   if(data == name){
       text = "<p class='r_chat'>" +name +": ";
 //$("#txtwindow").append(name+":2 <div>"+ data +"</div>");
   }else{
-    test = "fail : ";
+    text = "<p class='l_chat'>" +data +": ";
   }
 
 	//alert(data);
@@ -144,19 +170,20 @@ var room ="";
 
 function getName(room,id){
 name = prompt("이름을 입력하세요.", "");
-var bool= confirm("이름이 "+name+" 맞습니까?");
+//var bool= confirm("이름이 "+name+" 맞습니까?");
 
-  if(bool && id != ""){
+  if(id != ""){
 
     socket.emit('USER-INFO', { ten: name, peerId: id });
-    $('#room_enter').show();    // 값 입력 후 stream video channel 로 enter
-    $('#room-list').hide();     // 입장시 id 입력 창
     $("#room-connecter").html(room);
     socket.emit("room-num",room);
+    $('#room_enter').show();    // 값 입력 후 stream video channel 로 enter
+    $('#room-list').hide();     // 입장시 id 입력 창
     //location.href="./test.html?room="+room+"&id="+name;
   }else{
     console.log("retry");
   }
+
 }
 
 peer.on('open', id => {
