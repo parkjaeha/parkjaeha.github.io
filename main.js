@@ -4,6 +4,8 @@ $('#room_enter').hide();
 var name="";
 let customConfig;
 var text = "";
+var dt;
+var time;
 
 $.ajax({
   url: "",
@@ -123,11 +125,13 @@ socket.on("server-send-room-socket", function(data){
 });
 
 
-
 socket.on("server-chat",function(data){
-  console.log("data:1 "+data);
-  console.log("text111: "+name);
-  text = text + data+"</p>";
+  var count = data.length;
+  console.log("data:1 "+count);
+
+   text =  text + data + "</p>"+"</div>";
+
+  console.log("text--------->: "+text);
   $("#txtwindow").append(text);
 	//$("#txtwindow").append(name+":1 <div>"+ data +"</div>");
 	//alert(data);
@@ -136,11 +140,16 @@ socket.on("server-chat",function(data){
 socket.on("server-name",function(data){
   console.log("data:2 "+data+" / "+name);
   text="";
+  dt = new Date();
+  time = dt.getHours() + ":" + dt.getMinutes();
+  console.log(time);
+  //right
   if(data == name){
-      text = "<p class='r_chat'>" +name +": ";
+      text = "<div class='container darker'>"+'<span class="time-left">'+time+'</span>'+'<img src="/worknode/rtc-start-kit/public/img/chat.png" alt="Avatar" style="width:80%;" class="right">'+"<p class='text_r'>" +name +"</p> <p class='text_or'>";
 //$("#txtwindow").append(name+":2 <div>"+ data +"</div>");
+  //left
   }else{
-    text = "<p class='l_chat'>" +data +": ";
+    text = "<div class='container'>"+'<span class="time-right">'+time+'</span>'+'<img src="/worknode/rtc-start-kit/public/img/chat.png" alt="Avatar" style="width:80%;">'+"<p class='text_l'>" +data +"</p> <p class='text_ol'>";
   }
 
 	//alert(data);
@@ -154,7 +163,6 @@ name = prompt("이름을 입력하세요.", "");
 //var bool= confirm("이름이 "+name+" 맞습니까?");
 
   if(id != ""){
-
     socket.emit('USER-INFO', { ten: name, peerId: id });
     $("#room-connecter").html(room);
     socket.emit("room-num",room);
@@ -184,19 +192,38 @@ peer.on('open', id => {
       getName(room);
   });
 });
-
+var textmsg;
+var vt = [];
+var count = 0;
+var number = 0;
+var result = "";
 $(document).ready(function(){
 /*
 	$("#btnRoom").click(function(){
 		socket.emit("room-num",$('#txtRoom').val());
 	});
 */
-	$("#btnChat").click(function(){
-    //    socket.emit('USER-INFO', { ten: name, peerId: id });
-    socket.emit("user-name", name);
-    socket.emit("user-chat", $("#txtMessage").val());
 
-	});
+function chat_msg(){
+  socket.emit("user-name", name);
+
+  socket.emit("user-chat", $("#txtMessage").val());
+  $("#txtMessage").val("");
+}
+
+  $("#txtMessage").keyup(function(){
+    textmsg = $(this).val();
+    console.log("length: "+textmsg.length);
+  });
+
+  $('#txtMessage').keyup(function(e) {
+      if (e.keyCode == 13) chat_msg();
+  });
+
+  $("#btnChat").click(function(){
+      chat_msg();
+   });
+
 
 
 });

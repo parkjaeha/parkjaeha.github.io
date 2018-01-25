@@ -1,5 +1,10 @@
 @CHARSET "EUC-KR";
 
+*{
+    margin: 0;
+    padding: 0;
+}
+
 #roomHienTai{background-color: gray; width: 100px;
  float: right; color: white;}
 
@@ -8,6 +13,93 @@
 	width: 40%;
 	height: 700px;
 	float: left;
+}
+
+/* ////////////////////////////////////////////////////////// */
+
+.container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.darker {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.container img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.container img.right {
+    float: right;
+    margin-left: 10px;
+    margin-right:0;
+}
+
+.time-right {
+    float: right;
+    color: #aaa;
+}
+
+.time-left {
+    float: left;
+    color: #999;
+}
+
+.text_r{
+  float: right;
+  font-weight: bolder;
+  line-height: 35px;
+  display: inline-block;
+}
+
+.text_l{
+  float: left;
+  display: inline-block;
+  font-weight: bolder;
+  line-height: 35px;
+  margin-right: 10px;
+}
+
+.text_or{
+    line-height: 60px;
+    margin-right: 10px;
+    float: right;
+}
+
+.text_ol{
+    line-height: 60px;
+    margin-left: 10px;
+}
+/* ///////////////////////////////////////////////////////// */
+
+.l_chat{
+  float: left;
+  background-color: yellow;
+  height: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.r_chat{
+  float: right;
+  background-color: yellow;
+  height: 16px;
 }
 
 #m_right{
