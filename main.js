@@ -121,20 +121,21 @@ socket.on("server-send-room-socket", function(data){
 socket.on("server-chat",function(data){
   console.log("data:1 "+data);
   console.log("text111: "+name);
-  text = text + data+"</div>";
-  //$("#txtwindow").append(text);
-	$("#txtwindow").append(name+":1 <div>"+ data +"</div>");
+  text = text + data+"</p>";
+  $("#txtwindow").append(text);
+	//$("#txtwindow").append(name+":1 <div>"+ data +"</div>");
 	//alert(data);
 });
 
 socket.on("server-name",function(data){
   console.log("data:2 "+data+" / "+name);
   if(data == name){
-      text = name +": "+ "<div clas='r_chat'>";
+      text = "<p class='r_chat'>" +name +": ";
+//$("#txtwindow").append(name+":2 <div>"+ data +"</div>");
   }else{
     test = "fail : ";
   }
-	$("#txtwindow").append(name+":2 <div>"+ data +"</div>");
+
 	//alert(data);
 });
 
