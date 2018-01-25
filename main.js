@@ -107,26 +107,6 @@ peer.on('call', call => {
     call.on('stream',remoteStream => playStream('remoteStream', remoteStream));
   });
 });
-/////////////////////////////////////////testData
-$('#btnCall2').click(() => {
-  const id = $('#remoteId2').val();
-  //console.log("id: "+id);
-  openStream()
-  .then(stream => {
-      playStream('localStream', stream);
-      const call = peer.call(id,stream);
-      call.on('stream',testStream => playStream('testStream', testStream));
-  });
-});
-
-peer.on('call', call => {
-  openStream()
-  .then(stream => {
-    call.answer(stream);
-    playStream('localStream', stream);
-    call.on('stream',testStream => playStream('testStream', testStream));
-  });
-});
 
 /////////////////////////////////////////////////////////
 socket.on("server-send-rooms", function(data){
