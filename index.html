@@ -9,16 +9,14 @@
 
     </head>
     <body>
+<div id="room-list">
 
 <div id="m_left">
        <div id="div-enter">
           <br /><br />
-          <input type="text" id="txtUsername" placeholder="Enter your username">
-          <button id="btnSignUp">Sign up</button>
-          <ul id="test" style="width:100px; height:50px; background-color:yellow;">
-          </ul>
         </div>
 </div>
+
 <div id="m_right">
 
 <div class="l_div">
@@ -110,13 +108,50 @@
       <div>
           <p>자바 개발자 양성과정</P>
           <p>메인 및 로그인</P>
+          </div>
+      </div>
+
       </div>
     </div>
-
   </div>
-</div>
 
 </div>
+
+<div id="room_enter">
+
+  <div id="div-chat">
+
+
+    <div>Online user: </div>
+    <ul id="ulUser">
+    </ul>
+      <input type="text" id="remoteId" placeholder="Remote Id">
+      <button id="btnCall">Call</button>
+
+      <div id="my-peer">You Id : </div>
+      <video id="localStream" width="90%" height="300" controls></video>
+      <br /><br />
+      <video id="remoteStream" width="90%" height="300" controls></video>
+   </div>
+
+   <div id="div-chatting">
+     <div id="div-top">
+    room name : <h4 id="room-connecter">...</h4>
+    <div id="dsRoom"></div>
+    </div>
+
+    <div id="div-bottom">
+    <div id="txtwindow">
+    </div>
+        <div id="txt_b">
+          <input type="text" id="txtMessage"/>
+          <input type="button" id="btnChat" value="Chat"/>
+        </div>
+    </div>
+  </div>
+
+</div>
+
     </body>
     <script src="main.js"></script>
 </html>

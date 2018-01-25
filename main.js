@@ -1,8 +1,9 @@
 const socket = io('https://stream1801.herokuapp.com/');
 var data = [];
-//$('#div-chat').hide();
-
+$('#room_enter').hide();
+var name="";
 let customConfig;
+var text = "";
 
 $.ajax({
   url: "",
@@ -23,8 +24,6 @@ $.ajax({
 // user info get
 socket.on('ONLINE', arrUserInfo => {
 
-    //$('#div-chat').show();    // 값 입력 후 stream video channel 로 enter
-    //$('#div-enter').hide(); // 입장시 id 입력 창
     console.log("arr: "+arrUserInfo);
     arrUserInfo.forEach(user => {
         const { ten, peerId } = user;
@@ -36,40 +35,10 @@ socket.on('ONLINE', arrUserInfo => {
         //console.log(user);
         const { ten, peerId } = user;
         $('#ulUser').append(`<li id="${peerId}">${ten}</li>`);
+
     });
-///////////////////////////////////
-socket.on('GETDATA', data=>{
-  const {room , id} = testData;
-  $('#room-connecter').append(`${room} /1/ ${id}`);
-});
 
-socket.on('GETEST', testData => {
-  testData.forEach(data2 => {
-    const { room, id } = data2;
-      console.log("test : " + room+ " / " + id);
-    $('#room-connecter').append(`${room} /2/ ${id}`);
-  });
-});
 
-socket.on('please',testData=> {
-  testData.forEach(data2 => {
-    const { room, id } = data2;
-      console.log("test : " + room+ " / " + id);
-    $('#room_test').append("gogo");
-    $('#room_test').append(`${room} /2/ ${id}`);
-  });
-});
-
-socket.on("join",testData=> {
-  testData.forEach(data2 => {
-    const { room, id } = data2;
-      console.log("test : " + room+ " / " + id);
-    $('#room_test2').append("gogo");
-    $('#room_test2').append(`${room} /2/ ${id}`);
-  });
-});
-
-/////////////////////////////////
     socket.on('DISCONNECT',peerId => {
       $(`#${peerId}`).remove();
     });
@@ -108,6 +77,7 @@ peer.on('open', id => {
       socket.emit('USER-INFO',   { ten: username, peerId: id });
   });
 });
+
 */
 
  //caller
@@ -136,21 +106,40 @@ peer.on('call', call => {
 socket.on("server-send-rooms", function(data){
 	   $("#dsRoom").html("");
 	 data.map(function(r){
-	   $("#dsRoom").append("<h4 class='room'>"+r+"</h4>");
+
+	   //$("#dsRoom").append(name+"<h4 class=''>"+r+"</h4>");
 	});
 });
 
 socket.on("server-send-room-socket", function(data){
-	$("#room-connecter").html(data);
+  console.log(data);
+	//$("#room-connecter").html(data);
 });
 
+
+
 socket.on("server-chat",function(data){
-  console.log("data: "+data);
-	$("#txtwindow").append("<div>"+ data +"</div>");
+  console.log("data:1 "+data);
+  console.log("text111: "+name);
+  text = text + data+"</div>";
+  //$("#txtwindow").append(text);
+	$("#txtwindow").append(name+":1 <div>"+ data +"</div>");
 	//alert(data);
 });
 
-var name="";
+socket.on("server-name",function(data){
+  console.log("data:2 "+data+" / "+name);
+  if(data == name){
+      text = name +": "+ "<div clas='r_chat'>";
+  }else{
+    test = "fail : ";
+  }
+	$("#txtwindow").append(name+":2 <div>"+ data +"</div>");
+	//alert(data);
+});
+
+//////////////////////////////////
+var room ="";
 
 function getName(room,id){
 name = prompt("이름을 입력하세요.", "");
@@ -159,16 +148,18 @@ var bool= confirm("이름이 "+name+" 맞습니까?");
   if(bool && id != ""){
 
     socket.emit('USER-INFO', { ten: name, peerId: id });
-    socket.emit('TEST', {room: room , id: name});
-    location.href="./test.html?room="+room+"&id="+name;
+    $('#room_enter').show();    // 값 입력 후 stream video channel 로 enter
+    $('#room-list').hide();     // 입장시 id 입력 창
+    $("#room-connecter").html(room);
+    socket.emit("room-num",room);
+    //location.href="./test.html?room="+room+"&id="+name;
   }else{
     console.log("retry");
   }
 }
-var room ="";
+
 peer.on('open', id => {
   $('#my-peer').append(id);
-$('#room_test2').append("test: "+room);
 
   $(".l_room").click(function(){
      room = $(this).attr('id');
@@ -186,15 +177,16 @@ $('#room_test2').append("test: "+room);
 });
 
 $(document).ready(function(){
-
+/*
 	$("#btnRoom").click(function(){
 		socket.emit("room-num",$('#txtRoom').val());
-    socket.emit("test2","hello");
-    socket.emit("test3","hello2");
 	});
-
+*/
 	$("#btnChat").click(function(){
-		socket.emit("user-chat",$("#txtMessage").val());
+    //    socket.emit('USER-INFO', { ten: name, peerId: id });
+    socket.emit("user-name", name);
+    socket.emit("user-chat", $("#txtMessage").val());
+
 	});
 
 
