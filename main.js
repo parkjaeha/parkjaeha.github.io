@@ -21,6 +21,7 @@ $.ajax({
   },
   async: false
 });
+
 // user info get
 socket.on('ONLINE', arrUserInfo => {
 
