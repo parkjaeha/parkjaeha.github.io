@@ -145,11 +145,11 @@ socket.on("server-name",function(data){
   console.log(time);
   //right
   if(data == name){
-      text = "<div class='container darker'>"+'<span class="time-left">'+time+'</span>'+'<img src="/worknode/rtc-start-kit/public/img/chat.png" alt="Avatar" style="width:80%;" class="right">'+"<p class='text_r'>" +name +"</p> <p class='text_or'>";
+      text = "<div class='container darker'>"+'<span class="time-left">'+time+'</span>'+'<img src="/public/img/chat.png" alt="Avatar" style="width:80%;" class="right">'+"<p class='text_r'>" +name +"</p> <p class='text_or'>";
 //$("#txtwindow").append(name+":2 <div>"+ data +"</div>");
   //left
   }else{
-    text = "<div class='container'>"+'<span class="time-right">'+time+'</span>'+'<img src="/worknode/rtc-start-kit/public/img/chat.png" alt="Avatar" style="width:80%;">'+"<p class='text_l'>" +data +"</p> <p class='text_ol'>";
+    text = "<div class='container'>"+'<span class="time-right">'+time+'</span>'+'<img src="/public/img/chat.png" alt="Avatar" style="width:80%;">'+"<p class='text_l'>" +data +"</p> <p class='text_ol'>";
   }
 
 	//alert(data);
