@@ -6,128 +6,112 @@
         <script src="jquery.js"></script>
         <script src="peer.js"></script>
         <script src="socket.io.js"></script>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
     <body>
+
 <div id="room-list">
 
-<div id="m_left">
-       <div id="div-enter">
-          <br /><br />
-        </div>
-</div>
-
-<div id="m_right">
-
-<div class="l_div">
-  <div class="l_room" id="room1">
-
-    <div class="room_t">
-      <img style="float:left" width="100px;"height="100px;" src="">
-      <div style="float:right">김보근</div>
-    </div>
-
-    <div class="room_b">
-      <div>
-        <p>자바 개발자 양성과정</P>
-        <p>게시판</P>
-      </div>
-    </div>
+  <div class="card">
+    <img src="/worknode/rtc-start-kit/public/img/chat.png" alt="park" style="width:100%">
+    <h1>Park JaeHa</h1>
+    <p class="title">CEO & Founder, Example</p>
+    <p>Harvard University</p>
+    <div style="margin: 24px 0;">
+      <a href="#"><i class="fa fa-dribbble a_link"></i></a>
+      <a href="#"><i class="fa fa-twitter a_link"></i></a>
+      <a href="#"><i class="fa fa-linkedin a_link"></i></a>
+      <a href="#"><i class="fa fa-facebook a_link"></i></a>
+   </div>
+   <p><button class="button_click" id="room1">Contact</button></p>
   </div>
 
-  <div class="l_room" id="room3">
-
-    <div class="room_t">
-      <img style="float:left" width="100px;"height="100px;" src="">
-      <div style="float:right">박재하</div>
-    </div>
-
-    <div class="room_b">
-      <div>
-        <p>자바 개발자 양성과정</P>
-        <p>웹캠 상담</P>
-      </div>
-    </div>
-
+  <div class="card">
+    <img src="/worknode/rtc-start-kit/public/img/chat.png" alt="lee" style="width:100%">
+    <h1>Lee SuBean</h1>
+    <p class="title">CEO & Founder, Example</p>
+    <p>Harvard University</p>
+    <div style="margin: 24px 0;">
+      <a href="#"><i class="fa fa-dribbble a_link"></i></a>
+      <a href="#"><i class="fa fa-twitter a_link"></i></a>
+      <a href="#"><i class="fa fa-linkedin a_link"></i></a>
+      <a href="#"><i class="fa fa-facebook a_link"></i></a>
+   </div>
+   <p><button class="button_click" id="room2">Contact</button></p>
   </div>
-  <div class="l_room" id="room5">
 
-    <div class="room_t">
-      <img style="float:left" width="100px;"height="100px;" src="">
-      <div style="float:right">이경배</div>
-    </div>
-
-    <div class="room_b">
-      <div>
-        <p>자바 개발자 양성과정</P>
-        <p>캘린더</P>
-      </div>
-    </div>
-
+  <div class="card">
+    <img src="/worknode/rtc-start-kit/public/img/chat.png" alt="kim" style="width:100%">
+    <h1>Kim BoGen</h1>
+    <p class="title">CEO & Founder, Example</p>
+    <p>Harvard University</p>
+    <div style="margin: 24px 0;">
+      <a href="#"><i class="fa fa-dribbble a_link"></i></a>
+      <a href="#"><i class="fa fa-twitter a_link"></i></a>
+      <a href="#"><i class="fa fa-linkedin a_link"></i></a>
+      <a href="#"><i class="fa fa-facebook a_link"></i></a>
+   </div>
+   <p><button class="button_click" id="room3">Contact</button></p>
   </div>
-</div>
-<div class="r_div">
-  <div class="r_room" id="room2">
 
-    <div class="room_t">
-      <img style="float:left" width="100px;"height="100px;" src="">
-      <div style="float:right">이수빈</div>
-    </div>
-
-    <div class="room_b">
-      <div>
-        <p>자바 개발자 양성과정</P>
-        <p>단체 메신저</P>
-      </div>
-    </div>
-
+  <div class="card">
+    <img src="/worknode/rtc-start-kit/public/img/chat.png" alt="lee" style="width:100%">
+    <h1>Lee GungBe</h1>
+    <p class="title">CEO & Founder, Example</p>
+    <p>Harvard University</p>
+    <div style="margin: 24px 0;">
+      <a href="#"><i class="fa fa-dribbble a_link"></i></a>
+      <a href="#"><i class="fa fa-twitter a_link"></i></a>
+      <a href="#"><i class="fa fa-linkedin a_link"></i></a>
+      <a href="#"><i class="fa fa-facebook a_link"></i></a>
+   </div>
+   <p><button class="button_click" id="room4">Contact</button></p>
   </div>
-  <div class="r_room" id="room4">
 
-    <div class="room_t">
-      <img style="float:left" width="100px;"height="100px;" src="">
-      <div style="float:right">정도원</div>
-    </div>
-
-    <div class="room_b">
-      <div>
-          <p>자바 개발자 양성과정</P>
-          <p>웹 컴파일러</P>
-      </div>
-    </div>
-
+  <div class="card">
+    <img src="/worknode/rtc-start-kit/public/img/chat.png" alt="jung" style="width:100%">
+    <h1>Jung yunge</h1>
+    <p class="title">CEO & Founder, Example</p>
+    <p>Harvard University</p>
+    <div style="margin: 24px 0;">
+      <a href="#"><i class="fa fa-dribbble a_link"></i></a>
+      <a href="#"><i class="fa fa-twitter a_link"></i></a>
+      <a href="#"><i class="fa fa-linkedin a_link"></i></a>
+      <a href="#"><i class="fa fa-facebook a_link"></i></a>
+   </div>
+   <p><button class="button_click" id="room5">Contact</button></p>
   </div>
-  <div class="r_room" id="room6">
 
-    <div class="room_t">
-      <img style="float:left" width="100px;"height="100px;" src="">
-      <div style="float:right">정연재</div>
-    </div>
-
-    <div class="room_b">
-      <div>
-          <p>자바 개발자 양성과정</P>
-          <p>메인 및 로그인</P>
-          </div>
-      </div>
-
-      </div>
-    </div>
+  <div class="card">
+    <img src="/worknode/rtc-start-kit/public/img/chat.png" alt="jung" style="width:100%">
+    <h1>Jung dowon</h1>
+    <p class="title">CEO & Founder, Example</p>
+    <p>Harvard University</p>
+    <div style="margin: 24px 0;">
+      <a href="#"><i class="fa fa-dribbble a_link"></i></a>
+      <a href="#"><i class="fa fa-twitter a_link"></i></a>
+      <a href="#"><i class="fa fa-linkedin a_link"></i></a>
+      <a href="#"><i class="fa fa-facebook a_link"></i></a>
+   </div>
+   <p><button class="button_click" id="room6">Contact</button></p>
   </div>
 
 </div>
+
 
 <div id="room_enter">
 
   <div id="div-chat">
-
 
     <div>Online user: </div>
     <ul id="ulUser">
     </ul>
       <input type="text" id="remoteId" placeholder="Remote Id">
       <button id="btnCall">Call</button>
-
+      <span id="video_btn" class="glyphicon glyphicon-facetime-video" aria-hidden="true" style="cursor:pointer; font-size:20px;"></span>
       <div id="my-peer">You Id : </div>
       <video id="localStream" width="90%" height="300" controls></video>
       <br /><br />
@@ -135,21 +119,24 @@
    </div>
 
    <div id="div-chatting">
-     <div id="div-top">
-    room name : <h4 id="room-connecter">...</h4>
-    <br /><br />
-    <div id="dsRoom"></div>
-    </div>
+<div id="flip"><h4 id="room-connecter" style="margin-bottom: 0; display:inline-block; margin-right:5px;">...</h4><span id="font" class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></div>
 
+       <div id="panel">
     <div id="div-bottom">
-    <div id="txtwindow">
-    </div>
+      <div id="txtwindow">
+      </div>
         <div id="txt_b">
           <input type="text" id="txtMessage"/>
           <input type="button" id="btnChat" value="Chat"/>
         </div>
+        </div>
+      </div>
+
+      <div id="boarder">
+
+      </div>
     </div>
-  </div>
+
 
 </div>
 

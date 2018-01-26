@@ -6,6 +6,7 @@ let customConfig;
 var text = "";
 var dt;
 var time;
+var peer_data;
 
 $.ajax({
   url: "",
@@ -28,23 +29,39 @@ $.ajax({
 socket.on('ONLINE', arrUserInfo => {
 
     console.log("arr: "+arrUserInfo);
-    arrUserInfo.forEach(user => {
+    console.log("size: "+arrUserInfo.length);
+    console.log("socket: " +socket.peerId);
+    console.log("/////////////////////// online //////////////////////");
+
+        var user = "";
+        arrUserInfo.splice(0,arrUserInfo.length);
+      arrUserInfo.forEach(user => {
         const { ten, peerId } = user;
+        $('#my-peer').append("2"+peerId);
         console.log("result-arr : " + peerId+ " / " + ten);
+        //console.log("person : " + person);
         $('#ulUser').append(`<li id="${peerId}">${ten}</li>`);
-    });
+        console.log("/////////////////////// add //////////////////////");
+      });
 
-    socket.on('USER', user => {
-        //console.log(user);
-        const { ten, peerId } = user;
-        $('#ulUser').append(`<li id="${peerId}">${ten}</li>`);
-
-    });
-
+socket.on('USER', user => {
+  const { ten, peerId } = user;
+  //console.log("check: " + person);
+    if(arrUserInfo.length < 3){
+      console.log("size2: "+peerId);
+      $('#ulUser').append(`<li id="${peerId}">${ten}</li>`);
+      console.log("/////////////////////// li add //////////////////////");
+    }else{
+      console.log("last: "+ten);
+      console.log("/////////////////////// li else //////////////////////");
+    }
+});
 
     socket.on('DISCONNECT',peerId => {
       $(`#${peerId}`).remove();
+
     });
+
 });
 
 socket.on('EXIST', () => {
@@ -67,7 +84,6 @@ function playStream(idVideoTag, stream){
 
 //openStream()
 //.then(stream => playStream('localStream', stream));
-
 const peer = new Peer({
   key: 'peerjs',
   host: 'mypeer1801.herokuapp.com',
@@ -85,7 +101,6 @@ peer.on('open', id => {
       socket.emit('USER-INFO',   { ten: username, peerId: id });
   });
 });
-
 */
 
  //caller
@@ -114,7 +129,6 @@ peer.on('call', call => {
 socket.on("server-send-rooms", function(data){
 	   $("#dsRoom").html("");
 	 data.map(function(r){
-
 	   //$("#dsRoom").append(name+"<h4 class=''>"+r+"</h4>");
 	});
 });
@@ -123,7 +137,6 @@ socket.on("server-send-room-socket", function(data){
   console.log(data);
 	//$("#room-connecter").html(data);
 });
-
 
 socket.on("server-chat",function(data){
   var count = data.length;
@@ -134,7 +147,6 @@ socket.on("server-chat",function(data){
   console.log("text--------->: "+text);
   $("#txtwindow").append(text);
 	//$("#txtwindow").append(name+":1 <div>"+ data +"</div>");
-	//alert(data);
 });
 
 socket.on("server-name",function(data){
@@ -151,10 +163,8 @@ socket.on("server-name",function(data){
   }else{
     text = "<div class='container'>"+'<span class="time-right">'+time+'</span>'+'<img src="/public/img/chat.png" alt="Avatar" style="width:80%;">'+"<p class='text_l'>" +data +"</p> <p class='text_ol'>";
   }
-
 	//alert(data);
 });
-
 //////////////////////////////////
 var room ="";
 
@@ -172,37 +182,59 @@ name = prompt("이름을 입력하세요.", "");
   }else{
     console.log("retry");
   }
-
 }
 
 peer.on('open', id => {
-  $('#my-peer').append(id);
-
+  //$('#my-peer').append("1"+id);
+  peer_data = id;
   $(".l_room").click(function(){
      room = $(this).attr('id');
     console.log("l_data: "+ room);
     //  socket.emit('USER-INFO',   { ten: username, peerId: id });
-    getName(room,id);
+    getName(room,peer_data);
   });
 
   $(".r_room").click(function(){
      room = $(this).attr('id');
     console.log("r_data: "+ room);
     //  socket.emit('USER-INFO',   { ten: username, peerId: id });
-      getName(room);
+      getName(room,id);
   });
+
+  $(".button_click").click(function(){
+      room = $(this).attr('id');
+      console.log("new room :"+room);
+      getName(room,id);
+  });
+
 });
 var textmsg;
 var vt = [];
 var count = 0;
 var number = 0;
 var result = "";
+var num=0;
 $(document).ready(function(){
 /*
 	$("#btnRoom").click(function(){
 		socket.emit("room-num",$('#txtRoom').val());
 	});
 */
+
+var out = document.getElementById("txtwindow");
+// allow 1px inaccuracy by adding 1
+var isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
+
+$("#flip").click(function(){
+     $("#panel").slideToggle("slow");
+     if(num ==0){
+       num=1;
+       $("#font").attr("class","glyphicon glyphicon-chevron-up");
+     }else{
+       num=0;
+              $("#font").attr("class","glyphicon glyphicon-chevron-down");
+     }
+ });
 
 function chat_msg(){
   socket.emit("user-name", name);
@@ -211,19 +243,19 @@ function chat_msg(){
   $("#txtMessage").val("");
 }
 
-  $("#txtMessage").keyup(function(){
+  $('#txtMessage').keyup(function(e) {
     textmsg = $(this).val();
     console.log("length: "+textmsg.length);
-  });
-
-  $('#txtMessage').keyup(function(e) {
       if (e.keyCode == 13) chat_msg();
+
+      if(isScrolledToBottom)
+    out.scrollTop = out.scrollHeight - out.clientHeight;
   });
 
   $("#btnChat").click(function(){
       chat_msg();
+      if(isScrolledToBottom)
+    out.scrollTop = out.scrollHeight - out.clientHeight;
    });
-
-
 
 });

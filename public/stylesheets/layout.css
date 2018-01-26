@@ -8,12 +8,89 @@
 #roomHienTai{background-color: gray; width: 100px;
  float: right; color: white;}
 
+#room-list{
+  margin: 0 auto;
+  width: 870px;
+
+}
+
 #m_left{
-	background-color: blue;
+	/*background-color: blue;*/
 	width: 40%;
 	height: 700px;
 	float: left;
 }
+
+/* ///////////////////////////////////////////////////////// */
+#panel, #flip {
+    text-align: center;
+    background-color: #e5eecc;
+    border: solid 1px #c3c3c3;
+    bottom: 0;
+}
+
+#panel {
+    display: none;
+    height: 530px;
+}
+
+#boarder{
+  width: 60%;
+  height: 650px;
+  background-color: yellow;
+  position: absolute;
+  top:46px;
+  z-index: -1;
+}
+
+#flip{
+  height: 44px;
+}
+
+/* /////////////////////////////////////////////////////////  */
+
+.card {
+
+  float: left;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+.button_click {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.a_link {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+.button_click:hover, .a_link:hover {
+  opacity: 0.7;
+}
+
 
 /* ////////////////////////////////////////////////////////// */
 
@@ -23,6 +100,7 @@
     border-radius: 5px;
     padding: 5px;
     margin: 5px 0;
+    width: 100%!important;
 }
 
 .darker {
@@ -69,6 +147,7 @@
 
 .text_l{
   float: left;
+
   display: inline-block;
   font-weight: bolder;
   line-height: 35px;
@@ -78,12 +157,13 @@
 .text_or{
     line-height: 60px;
     margin-right: 10px;
-    float: right;
+    float: left;
 }
 
 .text_ol{
     line-height: 60px;
     margin-left: 10px;
+    float: left;
 }
 /* ///////////////////////////////////////////////////////// */
 
@@ -164,15 +244,15 @@
 /* test */
 #div-chat{
   width: 40%;
-  height: 750px;
-  background-color: yellow;
+
+  /*background-color: yellow;*/
   float: left;
 }
 
 #div-chatting{
   width: 60%;
-  height: 750px;
-  background-color: green;
+
+  /*background-color: green;*/
   float: right;
 }
 
@@ -189,33 +269,32 @@
 
 #div-bottom{
   width: 100%;
-  height: 350px;
-  background-color: blue;
+  height: 300px;
+  /*background-color: blue;*/
 }
 
 #div-top{
   width: 100%;
-  height: 400px;
-  background-color:  red;
+  height: 350px;
+  /*background-color:  red;*/
 }
 
 #txtMessage{
-  width: 41.5%;
-  height: 25px;
+  width: 82%;
+  height: 30px;
   font-size: 16px;
   float: left;
 }
 
 #btnChat{
   height: 30px;
-  width: 17%;
+  width: 18%;
   float: left;
-  margin-left: 0.5%;
 }
 
 #txt_b{
   width: 100%;
-  position: absolute;
+  position: relative;
   bottom: 0px;
 }
 
@@ -226,7 +305,7 @@
 
 #txtwindow{
   width: 100%;
-  height: 300px;
+  height: 500px;
   border: 1px solid black;
   overflow: auto;
 }
