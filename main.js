@@ -47,11 +47,9 @@ socket.on('USER', user => {
   const { ten, peerId } = user;
   //console.log("check: " + person);
       $('#ulUser').append(`<li id="${peerId}">${ten}</li>`);
-});
-
+    });
     socket.on('DISCONNECT',peerId => {
       $(`#${peerId}`).remove();
-
     });
 
 });
@@ -61,7 +59,6 @@ socket.on('EXIST', () => {
   $('#room_enter').hide();
   alert('SAME USERNAME EXIST');
 });
-
 
 function openStream(){
     const config = { audio: true, video: true };
@@ -133,15 +130,14 @@ socket.on("server-send-room-socket", function(data){
 socket.on("server-chat",function(data){
   var count = data.length;
   console.log("data:1 "+count);
-
    text =  text + data + "</p>"+"</div>";
-
   console.log("text--------->: "+text);
   $("#txtwindow").append(text);
 	//$("#txtwindow").append(name+":1 <div>"+ data +"</div>");
 });
 
 socket.on("server-name",function(data){
+
   console.log("data:2 "+data+" / "+name);
   text="";
   dt = new Date();
@@ -163,7 +159,6 @@ var room ="";
 function getName(room,id){
 name = prompt("이름을 입력하세요.", "");
 //var bool= confirm("이름이 "+name+" 맞습니까?");
-
   if(id != ""){
     socket.emit('USER-INFO', { ten: name, peerId: id });
     $("#room-connecter").html(room);
@@ -188,7 +183,7 @@ peer.on('open', id => {
 
   $(".r_room").click(function(){
      room = $(this).attr('id');
-    console.log("r_data: "+ room);
+     console.log("r_data: "+ room);
     //  socket.emit('USER-INFO',   { ten: username, peerId: id });
       getName(room,id);
   });
@@ -198,8 +193,8 @@ peer.on('open', id => {
       console.log("new room :"+room);
       getName(room,id);
   });
-
 });
+
 var textmsg;
 var vt = [];
 var count = 0;
@@ -207,12 +202,9 @@ var number = 0;
 var result = "";
 var num=0;
 $(document).ready(function(){
-/*
-	$("#btnRoom").click(function(){
+/* $("#btnRoom").click(function(){
 		socket.emit("room-num",$('#txtRoom').val());
-	});
-*/
-
+});*/
 var out = document.getElementById("txtwindow");
 // allow 1px inaccuracy by adding 1
 var isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
@@ -224,22 +216,20 @@ $("#flip").click(function(){
        $("#font").attr("class","glyphicon glyphicon-chevron-up");
      }else{
        num=0;
-              $("#font").attr("class","glyphicon glyphicon-chevron-down");
+       $("#font").attr("class","glyphicon glyphicon-chevron-down");
      }
  });
 
 function chat_msg(){
   socket.emit("user-name", name);
-
   socket.emit("user-chat", $("#txtMessage").val());
   $("#txtMessage").val("");
 }
 
-  $('#txtMessage').keyup(function(e) {
+  $('#txtMessage').keyup(function(e){
     textmsg = $(this).val();
     console.log("length: "+textmsg.length);
       if (e.keyCode == 13) chat_msg();
-
       if(isScrolledToBottom)
     out.scrollTop = out.scrollHeight - out.clientHeight;
   });
