@@ -34,7 +34,6 @@ socket.on('ONLINE', arrUserInfo => {
     console.log("/////////////////////// online //////////////////////");
 
         var user = "";
-        arrUserInfo.splice(0,arrUserInfo.length);
       arrUserInfo.forEach(user => {
         const { ten, peerId } = user;
         $('#my-peer').append("2"+peerId);
@@ -47,14 +46,7 @@ socket.on('ONLINE', arrUserInfo => {
 socket.on('USER', user => {
   const { ten, peerId } = user;
   //console.log("check: " + person);
-    if(arrUserInfo.length < 3){
-      console.log("size2: "+peerId);
       $('#ulUser').append(`<li id="${peerId}">${ten}</li>`);
-      console.log("/////////////////////// li add //////////////////////");
-    }else{
-      console.log("last: "+ten);
-      console.log("/////////////////////// li else //////////////////////");
-    }
 });
 
     socket.on('DISCONNECT',peerId => {
