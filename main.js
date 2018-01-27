@@ -7,6 +7,12 @@ var text = "";
 var dt;
 var time;
 var peer_data;
+var textmsg;
+var vt = [];
+var count = 0;
+var number = 0;
+var result = "";
+var num=0;
 
 $.ajax({
   url: "",
@@ -48,6 +54,7 @@ socket.on('USER', user => {
   //console.log("check: " + person);
       $('#ulUser').append(`<li id="${peerId}">${ten}</li>`);
     });
+
     socket.on('DISCONNECT',peerId => {
       $(`#${peerId}`).remove();
     });
@@ -195,12 +202,6 @@ peer.on('open', id => {
   });
 });
 
-var textmsg;
-var vt = [];
-var count = 0;
-var number = 0;
-var result = "";
-var num=0;
 $(document).ready(function(){
 /* $("#btnRoom").click(function(){
 		socket.emit("room-num",$('#txtRoom').val());
