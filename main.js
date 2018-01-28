@@ -42,7 +42,7 @@ socket.on('ONLINE', arrUserInfo => {
         var user = "";
       arrUserInfo.forEach(user => {
         const { ten, peerId } = user;
-        $('#my-peer').append("2"+peerId);
+        $('#my-peer').append(peerId+"<br/>");
         console.log("result-arr : " + peerId+ " / " + ten);
         //console.log("person : " + person);
         $('#ulUser').append(`<li id="${peerId}">${ten}</li>`);

@@ -34,7 +34,7 @@
     height: 530px;
 }
 
-#boarder{
+#canvasDiv{
   width: 60%;
   height: 650px;
   background-color: yellow;
