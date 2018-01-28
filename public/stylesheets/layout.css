@@ -243,14 +243,14 @@
 
 /* test */
 #div-chat{
-  width: 40%;
+  width: 60%;
 
   /*background-color: yellow;*/
   float: left;
 }
 
 #div-chatting{
-  width: 60%;
+  width: 40%;
 
   /*background-color: green;*/
   float: right;

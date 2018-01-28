@@ -3,7 +3,7 @@
 var prepareCanvas = function () {
   var socket = io();
   var canDiv = document.getElementById("canvasDiv");
-  var canvasWidth="400";
+  var canvasWidth="700";
   var canvasHeight = "400";
   canvas     = document.createElement("canvas");
   canvas.setAttribute("width", canvasWidth);
