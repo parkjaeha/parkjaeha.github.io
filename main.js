@@ -181,19 +181,6 @@ name = prompt("이름을 입력하세요.", "");
 peer.on('open', id => {
   //$('#my-peer').append("1"+id);
   peer_data = id;
-  $(".l_room").click(function(){
-     room = $(this).attr('id');
-    console.log("l_data: "+ room);
-    //  socket.emit('USER-INFO',   { ten: username, peerId: id });
-    getName(room,peer_data);
-  });
-
-  $(".r_room").click(function(){
-     room = $(this).attr('id');
-     console.log("r_data: "+ room);
-    //  socket.emit('USER-INFO',   { ten: username, peerId: id });
-      getName(room,id);
-  });
 
   $(".button_click").click(function(){
       room = $(this).attr('id');
@@ -292,7 +279,6 @@ $(document).ready(function(){
 var out = document.getElementById("txtwindow");
 // allow 1px inaccuracy by adding 1
 var isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
-prepareCanvas();
 
 $("#flip").click(function(){
      $("#panel").slideToggle("slow");
@@ -325,4 +311,5 @@ function chat_msg(){
     out.scrollTop = out.scrollHeight - out.clientHeight;
    });
 
+prepareCanvas();
 });
