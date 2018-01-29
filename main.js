@@ -214,7 +214,6 @@ var prepareCanvas = function () {
   canDiv.appendChild(canvas);
  context = canvas.getContext("2d");
 
-
   var clickX = new Array();
   var clickY = new Array();
   var clickDrag = new Array();
@@ -225,9 +224,7 @@ var prepareCanvas = function () {
     clickX.push(x);
     clickY.push(y);
     clickDrag.push(draggin);
-
   }
-
 
   function redraw(clickDrag,clickX,clickY){
 
@@ -315,6 +312,7 @@ function chat_msg(){
     textmsg = $(this).val();
     console.log("length: "+textmsg.length);
       if (e.keyCode == 13) chat_msg();
+
       if(isScrolledToBottom)
     out.scrollTop = out.scrollHeight - out.clientHeight;
   });
@@ -325,6 +323,6 @@ function chat_msg(){
     out.scrollTop = out.scrollHeight - out.clientHeight;
    });
 
-prepareCanvas();
+//prepareCanvas();
 
 });
